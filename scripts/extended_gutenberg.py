@@ -77,44 +77,69 @@ if __name__ == "__main__":
 
     dct = corpora.Dictionary(preprocessed)
 
+    map_word = {key:value for key,value in zip(dct.values(),dct.cfs.values())}
+    
+    index_word = {key:value for value,key in enumerate(dct.values())}
+#map=[]
 
-map=[]
+#for i in range(np.size(dct)):
+#	map.append([dct[i],dct.cfs[i]])
 
-for i in range(np.size(dct)):
-	map.append([dct[i],dct.cfs[i]])
-
-print(len(map))
+#print(len(map))
 
 
-sorted_map = sorted(map, key=lambda x: x[0])
+    print(index_word)
+    sorted_map = sorted(map_word, key=lambda x: x[0])
 # Specify the file name, e.g., 'output.txt'
-file_name = 'vocab.txt'
+#file_name = 'words.vocab.txt'
+    filtered = dict(filter(lambda keyval:keyval[1] >= 5 ,map_word.items()))
+    tabSeperatead = [f"{key}   {val}" for key,val in filtered.items()]
 
-# Open the file in write mode and iterate through the 2D list
-with open(file_name, 'w') as file:
-    for row in sorted_map:
-        # Convert each element in the row to a string and join them with a space or another delimiter
-        line = ' '.join(str(element) for element in row)
-        # Write the formatted line to the file and add a newline
-        file.write(line + '\n')
+    str = "\n".join(tabSeperatead)
 
-# Create a list of lowercase English characters
-lowercase_chars = [chr(i) for i in range(ord('a'), ord('z') + 1)]
-#lowercase_chars.insert(ALT + 238,0)
-# Initialize an empty list to store character-integer pairs
-char_int_pairs = []
+    f = open("../vocab/words.vocab.txt", "a")
+    f.write(str)
+    f.close()
+    # Create a list of lowercase English characters
+    lowercase_chars = [chr(i) for i in range(ord('a'), ord('z') + 1)]
+    lowercase_chars.insert(0,'ε')
+    # Initialize an empty list to store character-integer pairs
+    char_int_pairs = []
 
-# Assign ascending integer indexes to each character
-for idx, char in enumerate(lowercase_chars, start=1):
-    char_int_pairs.append([char, idx])
+    # Assign ascending integer indexes to each character
+    for idx, char in enumerate(lowercase_chars, start=0):
+        char_int_pairs.append([char, idx])
 
-# Specify the file name, e.g., 'output.syms'
-file_name = 'chars.syms'
+    # Specify the file name, e.g., 'output.syms'
+    file_name = 'chars.syms'
 
-# Open the file in write mode and iterate through the char_int_pairs list
-with open(file_name, 'w') as file:
-    for pair in char_int_pairs:
+    # Open the file in write mode and iterate through the char_int_pairs list
+    with open(file_name, 'w') as file:
+        for pair in char_int_pairs:
+            #print(pair)
+            line = f'{pair[0]}\t{pair[1]}'
         # Convert each element in the pair to a string and join them with a space or another delimiter
-        line = ' '.join(str(element) for element in pair)
+
         # Write the formatted line to the file and add a newline
-        file.write(line + '\n')
+            file.write(line + '\n')
+
+#     word_idx = []
+#     lowercase_chars.insert(0,'ε')
+#     # Initialize an empty list to store character-integer pairs
+#     char_int_pairs = []
+
+    # Assign ascending integer indexes to each character
+
+#     # Specify the file name, e.g., 'output.syms'
+    file_name = '../vocab/words.syms'
+
+    # Open the file in write mode and iterate through the char_int_pairs list
+    with open(file_name, 'w') as file:
+        for key, value in index_word.items():
+            #print(pair)
+            line = f'{key}\t{value}'
+        # Convert each element in the pair to a string and join them with a space or another delimiter
+
+        # Write the formatted line to the file and add a newline
+            file.write(line + '\n')
+      
