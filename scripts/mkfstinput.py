@@ -9,6 +9,7 @@ OR:
 import sys
 
 from util import EPS, format_arc
+#word_list=open("../vocab/words.vocab.txt","a")
 
 
 def make_input_fst(word):
@@ -29,7 +30,14 @@ def make_input_fst(word):
 
     print(accept_state)
 
+def format_arc(src, dest, ilabel, olabel, weight):
+    return "{} {} {} {} {:.3f}".format(src, dest, ilabel, olabel, weight)
+
+
+
+#print(accept_state)
+
 
 if __name__ == "__main__":
-    word = sys.argv[1]
-    make_input_fst(word)
+    word_list = sys.argv[1]
+    make_input_fst(word_list)
