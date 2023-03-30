@@ -61,7 +61,7 @@ class Trie(object):
             self.output.append((prefix + node.char, node.counter))
         
         for child in node.children.values():
-            self.dfs(child, prefix + node.char)
+           self.dfs(child, prefix + node.char)
         
     def query(self, x):
         """Given an input (a prefix), retrieve all words stored in
@@ -87,28 +87,35 @@ class Trie(object):
         # Sort the results in reverse order and return
         return sorted(self.output, key=lambda x: x[1], reverse=True)
 
+    def dfs_traverse(self, node, chars):
+        """Depth-first traversal of the trie to collect characters of words"""
+        if node.is_end:
+            chars.append(node.char)
 
+        for child in node.children.values():
+            self.dfs_traverse(child, chars)
 
-def make_input_fst(word):
-    """Create an fst that accepts a word letter by letter
-    This can be composed with other FSTs, e.g. the spell
-    checker to provide an "input" word
-
-    """
-    s, accept_state = 0, 10000
-
-    for i, c in enumerate(word):
-        # TODO: You need to implement format_arc function in scripts/util
-        print(format_arc(s, s + 1, c, c, weight=0))
-        s += 1
-
-        if i == len(word) - 1:
-            print(format_arc(s, accept_state,"<epsilon>" ," <epsilon>", weight=0))
-
-    print(accept_state)
-
-def format_arc(src, dest, ilabel, olabel, weight):
-    return "{} {} {} {} {:.3f}".format(src, dest, ilabel, olabel, weight)
+    def get_all_chars(self):
+        """Get all characters of the words in the trie in DFS order"""
+        chars = []
+        self.dfs_traverse(self.root, chars)
+        return "".join(chars)
+    def make_input_fst(word):
+        """Create an fst that accepts a word letter by letter
+        This can be composed with other FSTs, e.g. the spell
+        checker to provide an "input" word"""
+        s, accept_state = 0, 10000
+        for i, c in enumerate(word):
+            # TODO: You need to implement format_arc function in scripts/util
+            print(format_arc(s, s + 1, c, c, weight=0))
+            s += 1
+            if i == len(word) - 1:
+                print(format_arc(s, accept_state,"<epsilon>" ," <epsilon>", weight=0))
+            
+            print(accept_state)
+    
+    def format_arc(src, dest, ilabel, olabel, weight):
+        return "{} {} {} {} {:.3f}".format(src, dest, ilabel, olabel, weight)
 
 
 
@@ -118,9 +125,7 @@ def format_arc(src, dest, ilabel, olabel, weight):
 
 if __name__ == "__main__":
     t = Trie()
-    word_list=["aman","big"]
-    #with open("words_only.syms", "r") as word_list:
-    for word in word_list:
-        t.insert(word)
-        print(t.query("aman"))
-
+    with open("words_only.syms", "r") as word_list:
+        for u,word in enumerate(word_list):
+            t.insert(word.strip())    
+    print(t.get_all_chars())

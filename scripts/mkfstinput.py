@@ -19,8 +19,9 @@ def make_input_fst(word):
 
     """
     s, accept_state = 0, 10000
-
-    for i, c in enumerate(word):
+   
+    for i,c in enumerate(word):
+        #print(i,c)
         # TODO: You need to implement format_arc function in scripts/util
         print(format_arc(s, s + 1, c, c, weight=0))
         s += 1
@@ -28,7 +29,7 @@ def make_input_fst(word):
         if i == len(word) - 1:
             print(format_arc(s, accept_state, EPS, EPS, weight=0))
 
-    print(accept_state)
+    
 
 def format_arc(src, dest, ilabel, olabel, weight):
     return "{} {} {} {} {:.3f}".format(src, dest, ilabel, olabel, weight)
@@ -39,5 +40,6 @@ def format_arc(src, dest, ilabel, olabel, weight):
 
 
 if __name__ == "__main__":
-    word_list = sys.argv[1]
-    make_input_fst(word_list)
+    f = open("chars_fst.syms","r")
+    stringword=f.read()
+    make_input_fst(stringword)
