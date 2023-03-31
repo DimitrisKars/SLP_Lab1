@@ -12,7 +12,7 @@ alphabet = word1
 weight = {
     "delete": 1.0,
     "insert": 1.0,
-    "sub": 1.0
+    "sub": 1.5
 }
 
 # No edit
@@ -21,11 +21,11 @@ for l in alphabet:
 
 # Deletes: input character, output epsilon
 for l in alphabet:
-    print("0 0 {} <epsilon> {:.3f}".format(l, weight["delete"]))
+    print("0 0 {} <eps> {:.3f}".format(l, weight["delete"]))
 
 # Insertions: input epsilon, output character
 for l in alphabet:
-    print("0 0 <epsilon> {} {:.3f}".format(l, weight["insert"]))
+    print("0 0 <eps> {} {:.3f}".format(l, weight["insert"]))
 
 # Substitutions: input one character, output another
 for l in alphabet:

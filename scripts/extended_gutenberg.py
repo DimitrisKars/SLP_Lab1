@@ -76,10 +76,11 @@ if __name__ == "__main__":
     preprocessed = process_file(raw_corpus, preprocess=preprocess)
 
     dct = corpora.Dictionary(preprocessed)
+    #dct.insert(0,"<eps>")
 
     map_word = {key:value for key,value in zip(dct.values(),dct.cfs.values())}
-    
-    index_word = {key:value for value,key in enumerate(dct.values())}
+    index_word = {key:value for value,key in enumerate(dct.values(),start=1)}
+    index_word["<eps>"]=0
 #map=[]
 
 #for i in range(np.size(dct)):
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     f.close()
     # Create a list of lowercase English characters
     lowercase_chars = [chr(i) for i in range(ord('a'), ord('z') + 1)]
-    lowercase_chars.insert(0,'ε')
+    lowercase_chars.insert(0,'<eps>')
     # Initialize an empty list to store character-integer pairs
     char_int_pairs = []
 

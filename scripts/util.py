@@ -35,7 +35,9 @@ def format_arc(src, dst, ilabel, olabel, weight=0):
         (str) The formatted line as a string
     http://www.openfst.org/twiki/bin/view/FST/FstQuickTour#CreatingShellFsts
     """
-    # TODO: INSERT YOUR CODE HERE
+    return "{} {} {} {} {:.3f}".format(src, dst, ilabel, olabel, weight)
+
     raise NotImplementedError(
         "You need to implement format_arc function in scripts/util.py!!!"
     )
+
