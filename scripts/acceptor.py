@@ -20,16 +20,16 @@ def make_input_fst(word,length):
     #length+=1
     for i, c in enumerate(word):
         if i==0:
-            print(format_arc(0, length, c, word, weight=0))
+            print(format_arc(1, length, c, word, weight=0))
         # TODO: You need to implement format_arc function in scripts/util
         else:
-            print(format_arc(length, length + 1, c, "<eps>", weight=0))
+            print(format_arc(length, length + 1, c, EPS, weight=0))
         length += 1
 
-        #if i == len(word) - 1:
-            #print(format_arc(length, accept_state, EPS, EPS, weight=0))
+        if i == len(word) - 1:
+            print(format_arc(length, 0, EPS, EPS, weight=0))
             #print(length-1)
-    print(length)
+    #print(0)
     #print(accept_state)
 
 
@@ -42,5 +42,5 @@ if __name__ == "__main__":
     for word in dictionary:
         make_input_fst(word,length)
         length+=len(word)+1
-
+    print("0")
 

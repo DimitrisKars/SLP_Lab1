@@ -1,4 +1,4 @@
-
+from util import EPS, format_arc
 
 with open("../vocab/chars.syms", 'r') as file:
     data = file.read().replace('\n', '').replace('\t','')
@@ -17,21 +17,25 @@ weight = {
 
 # No edit
 for l in alphabet:
-    print("0 0 {} {} {:.3f}".format(l, l, 0))
+    print(format_arc(0, 0, l, l))
+    #print("0 0 {} {} {:.3f}".format(l, l, 0))
 
 # Deletes: input character, output epsilon
 for l in alphabet:
-    print("0 0 {} <eps> {:.3f}".format(l, weight["delete"]))
+    print(format_arc(0, 0, l,"<eps>", weight["delete"]))
+    #print("0 0 {} <eps> {:.3f}".format(l, weight["delete"]))
 
 # Insertions: input epsilon, output character
 for l in alphabet:
-    print("0 0 <eps> {} {:.3f}".format(l, weight["insert"]))
+    print(format_arc(0, 0,"<eps>", l, weight["insert"]))
+    #print("0 0 <eps> {} {:.3f}".format(l, weight["insert"]))
 
 # Substitutions: input one character, output another
 for l in alphabet:
     for r in alphabet:
         if l != r:
-            print("0 0 {} {} {:.3f}".format(l, r, weight["sub"]))
+            print(format_arc(0, 0, l, r, weight["sub"]))
+            #print("0 0 {} {} {:.3f}".format(l, r, weight["sub"]))
 
 # Final state
 print(0)

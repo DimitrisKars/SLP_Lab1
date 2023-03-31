@@ -27,9 +27,9 @@ python mkfstinput.py ${WORD} |
     fstcompile --isymbols=${CHARSYMS} --osymbols=${CHARSYMS} |
     fstcompose - ${SPELL_CHECKER_COMPILED} |
     # Get shortest path and sort arcs
-    fstshortestpath |
+#    fstshortestpath |
     fstrmepsilon |
-    fsttopsort |
+#    fsttopsort |
     # print output fst using words.syms
     fstprint -osymbols=${WORDSYMS} |
     # Get destination word (corrected)
@@ -37,6 +37,6 @@ python mkfstinput.py ${WORD} |
     # Ignore epsilon outputs
     grep -v "<eps>" |
     # Ignore accepting state line
-    head -n -1 |
+    head -1 |
     # Remove trailing new line
     tr -d '\n'
