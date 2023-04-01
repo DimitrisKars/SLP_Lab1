@@ -31,6 +31,7 @@ def make_input_fst(word,length):
             #print(length-1)
     #print(0)
     #print(accept_state)
+    return (length)
 
 
 if __name__ == "__main__":
@@ -40,7 +41,7 @@ if __name__ == "__main__":
     #global length
     length = 1
     for word in dictionary:
-        make_input_fst(word,length)
-        length+=len(word)+1
+        length = make_input_fst(word,length)
+        #:length+=len(word)+1
     print("0")
 

@@ -27,9 +27,9 @@ python mkfstinput.py ${WORD} |
     fstcompile --isymbols=${CHARSYMS} --osymbols=${CHARSYMS} |
     fstcompose - ${SPELL_CHECKER_COMPILED} |
     # Get shortest path and sort arcs
-#    fstshortestpath |
+    fstshortestpath |
     fstrmepsilon |
-#    fsttopsort |
+    fsttopsort |
     # print output fst using words.syms
     fstprint -osymbols=${WORDSYMS} |
     # Get destination word (corrected)
