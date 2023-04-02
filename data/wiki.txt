@@ -211,7 +211,7 @@ aircrafts	aircraft
 airporta	airports
 airrcraft	aircraft
 aisian	asian
-aka	a.k.a.
+aka	a.k.a
 albiet	albeit
 alchohol	alcohol
 alchoholic	alcoholic

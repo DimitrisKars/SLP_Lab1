@@ -39,4 +39,5 @@ python mkfstinput.py ${WORD} |
     # Ignore accepting state line
     head -1 |
     # Remove trailing new line
-    tr -d '\n'
+    tr -d '\n' &&
+echo 

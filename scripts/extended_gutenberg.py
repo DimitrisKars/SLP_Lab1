@@ -76,6 +76,8 @@ if __name__ == "__main__":
     preprocessed = process_file(raw_corpus, preprocess=preprocess)
 
     dct = corpora.Dictionary(preprocessed)
+    
+    print(preprocessed)
     #dct.insert(0,"<eps>")
 
     map_word = {key:value for key,value in zip(dct.values(),dct.cfs.values())}
@@ -89,17 +91,18 @@ if __name__ == "__main__":
 #print(len(map))
 
 
-    print(index_word)
+    #print(index_word)
     sorted_map = sorted(map_word, key=lambda x: x[0])
 # Specify the file name, e.g., 'output.txt'
 #file_name = 'words.vocab.txt'
     filtered = dict(filter(lambda keyval:keyval[1] >= 5 ,map_word.items()))
-    tabSeperatead = [f"{key}   {val}" for key,val in filtered.items()]
+    tabSeperated = [f"{key}\t{val}" for key,val in filtered.items()]
 
-    str = "\n".join(tabSeperatead)
+    str = "\n".join(tabSeperated)
 
     f = open("../vocab/words.vocab.txt", "a")
     f.write(str)
+    f.write('\n')
     f.close()
     # Create a list of lowercase English characters
     lowercase_chars = [chr(i) for i in range(ord('a'), ord('z') + 1)]
@@ -110,7 +113,6 @@ if __name__ == "__main__":
     # Assign ascending integer indexes to each character
     for idx, char in enumerate(lowercase_chars, start=0):
         char_int_pairs.append([char, idx])
-
     # Specify the file name, e.g., 'output.syms'
     file_name = 'chars.syms'
 
