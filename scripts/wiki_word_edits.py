@@ -13,7 +13,7 @@ SCRIPT_DIRECTORY = os.path.realpath(__file__)
 def read_test_set(fname):
     pairs = []
     with open(fname, "r") as fd:
-        lines = [ln.strip().split("\t") for ln in fd.readlines()]
+        lines = [ln.rstrip().split("\t") for ln in fd.readlines()]
 
         for ln in lines:
             pairs.append((ln[0], ln[1]))
@@ -21,26 +21,31 @@ def read_test_set(fname):
 
 
 def edit(incorrect, correct):
-    edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}").strip().split("\t")
-    return edit
+    edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}")
+    edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}").rstrip().split("\n")
+    edits = []
+    for i in edit:
+        i = i.split("\t")
+        edits.append((i[0],i[1]))
+    return edits
 
 
 def frequency_dictionary(pairs):
     dictionary = {}
+    i = 0
     for pair in pairs:
+        i+=1
         edit_word = edit(pair[0], pair[1])
-        edit_word_pair = (edit_word[0], edit_word[1])
-
-        if edit_word_pair not in dictionary:
-            dictionary[edit_word_pair] = 1
-        else:
-            dictionary[edit_word_pair] += 1
+        for j in edit_word:
+            if j not in dictionary:
+                dictionary[j] = 1
+            else:
+                dictionary[j] += 1
 
     return dictionary
 
 if __name__ == "__main__":
-
-    pairs = read_test_set( "../data/wiki.txt")
+    pairs = read_test_set( "../data/wiki_copy2.txt")
     frequencies = frequency_dictionary(pairs)
     for key in frequencies:
-        print("{} \t {}").format(key[0], key[1])
+        print("\t".join([i for i in key]))
