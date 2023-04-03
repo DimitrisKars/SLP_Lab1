@@ -23,7 +23,7 @@ def read_test_set(fname):
 
 
 def edit(incorrect, correct):
-    edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}")
+    #edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}")
     edit = run_cmd(f"bash word_edits.sh {incorrect} {correct}").rstrip().split("\n")
     edits = []
     for i in edit:

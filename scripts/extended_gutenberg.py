@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     str = "\n".join(tabSeperated)
 
-    f = open("../vocab/words.vocab.txt", "a")
+    f = open("../vocab/words.vocab.txt", "w")
     f.write(str)
     f.write('\n')
     f.close()

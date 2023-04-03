@@ -17,11 +17,8 @@ if __name__ == "__main__":
 
     with open("../vocab/words.vocab.txt","r") as file:
         # Read the contents of the file into a list of lines
-       
-# Iterate over the lines and extract the two values from each line
-        for line in file.readlines():
-    # Split the line into a list of substrings based on the tab character
-           word,i=line.split('  ')
-    # Extract the two values from the list (assuming they are the first two elements)
-           i=int(i)
-           make_W_fst(word,i)
+        lines = [ln.rstrip().split("\t") for ln in file.readlines()]
+    for l in lines:
+        #print(l[1])
+        make_W_fst(l[0],float(l[1]))
+      
