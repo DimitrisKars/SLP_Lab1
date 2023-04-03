@@ -26,18 +26,20 @@ inf = 1000000
 # No edit
 for l in alphabet:
     print(format_arc(0, 0, l, l))
-count = 0
+
+count_zero = 0
 count_prob = 0
 zero = []
 V = len(frequencies)
 N = 0
+
 for key, item in frequencies.items():
     N += item
  
 # Deletes: input character, output epsilon
 for l in alphabet:
     if (l, '<eps>') not in frequencies:
-        count += 1
+        count_zero += 1
         zero.append((l, '<eps>'))
         #print(format_arc(0, 0, l,"<eps>", inf))
     else:
@@ -49,7 +51,7 @@ for l in alphabet:
 # Insertions: input epsilon, output character
 for l in alphabet:
     if ('<eps>', l) not in frequencies:
-        count += 1
+        count_zero += 1
         zero.append(('<eps>', l))
         #print(format_arc(0, 0,"<eps>", l, inf))
     else:    
@@ -64,7 +66,7 @@ for l in alphabet:
     for r in alphabet:
         if l != r:
             if (l, r) not in frequencies:
-                count += 1
+                count_zero += 1
                 zero.append((l, r))
                 #print(format_arc(0, 0, l, r, inf))
             else:
@@ -74,7 +76,7 @@ for l in alphabet:
                 print(format_arc(0, 0, l, r, p))
             #print("0 0 {} {} {:.3f}".format(l, r, weight["sub"]))
 
-remaining = 1 - count_prob
+remaining = (1 - count_prob)/count_zero
 for z in zero:
 
     print(format_arc(0, 0, z[0], z[1], remaining))

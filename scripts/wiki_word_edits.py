@@ -48,7 +48,7 @@ def frequency_dictionary(pairs):
     return dictionary
 
 if __name__ == "__main__":
-    pairs = read_test_set( "../data/wiki_copy3.txt")
+    pairs = read_test_set( "../data/wiki_copy.txt")
     frequencies = frequency_dictionary(pairs)
     f = open("dictionary.txt", "w")
     #for key in frequencies:
