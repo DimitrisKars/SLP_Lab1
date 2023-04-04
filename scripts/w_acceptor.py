@@ -18,7 +18,10 @@ if __name__ == "__main__":
     with open("../vocab/words.vocab.txt","r") as file:
         # Read the contents of the file into a list of lines
         lines = [ln.rstrip().split("\t") for ln in file.readlines()]
+    count = 0
+    for l in lines:
+        count += int(l[1])
     for l in lines:
         #print(l[1])
-        make_W_fst(l[0],float(l[1]))
-      
+        make_W_fst(l[0],int(l[1])/count)
+    print(0) 
