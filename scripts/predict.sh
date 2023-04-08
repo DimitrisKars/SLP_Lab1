@@ -17,8 +17,8 @@ CURRENT_DIRECTORY=$(dirname $0)
 
 ###
 # Make sure these files exist
-CHARSYMS=${CURRENT_DIRECTORY}/../syms/chars.syms
-WORDSYMS=${CURRENT_DIRECTORY}/../syms/word.syms
+CHARSYMS=${CURRENT_DIRECTORY}/../vocab/chars.syms
+WORDSYMS=${CURRENT_DIRECTORY}/../vocab/words.syms
 ###
 
 # Make input fst for the misspelled word

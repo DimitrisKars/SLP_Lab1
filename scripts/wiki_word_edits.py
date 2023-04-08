@@ -36,9 +36,9 @@ def frequency_dictionary(pairs):
     dictionary = {}
     total = 0
     for pair in pairs:
-        total+=1
         edit_word = edit(pair[0], pair[1])
         for j in edit_word:
+            total+=1
             if j not in dictionary:
                 dictionary[j] = 1
             else:
@@ -49,6 +49,6 @@ def frequency_dictionary(pairs):
 if __name__ == "__main__":
     pairs = read_test_set( "../data/wiki_copy.txt")
     frequencies = frequency_dictionary(pairs)
-    f = open("dictionary.txt", "w")
+    f = open("../vocab/dictionary.txt", "w")
     f.write(str(frequencies))
     f.close()

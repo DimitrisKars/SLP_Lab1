@@ -96,6 +96,7 @@ if __name__ == "__main__":
 # Specify the file name, e.g., 'output.txt'
 #file_name = 'words.vocab.txt'
     filtered = dict(filter(lambda keyval:keyval[1] >= 5 ,map_word.items()))
+     
     tabSeperated = [f"{key}\t{val}" for key,val in filtered.items()]
 
     str = "\n".join(tabSeperated)
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     for idx, char in enumerate(lowercase_chars, start=0):
         char_int_pairs.append([char, idx])
     # Specify the file name, e.g., 'output.syms'
-    file_name = 'chars.syms'
+    file_name = '../vocab/chars.syms'
 
     # Open the file in write mode and iterate through the char_int_pairs list
     with open(file_name, 'w') as file:
@@ -135,14 +136,17 @@ if __name__ == "__main__":
 
 #     # Specify the file name, e.g., 'output.syms'
     file_name = '../vocab/words.syms'
-
+    file_name_2 = open('../vocab/words_only.syms', 'w')
     # Open the file in write mode and iterate through the char_int_pairs list
     with open(file_name, 'w') as file:
         for key, value in index_word.items():
-            #print(pair)
-            line = f'{key}\t{value}'
+                if (key in filtered or value == 0):
+                    line = f'{key}\t{value}'
+                    line2 = f'{key}'
+                    file.write(line + '\n')
+                    if (value != 0):                   
+                        file_name_2.write(line2 + '\n')
         # Convert each element in the pair to a string and join them with a space or another delimiter
 
         # Write the formatted line to the file and add a newline
-            file.write(line + '\n')
       
