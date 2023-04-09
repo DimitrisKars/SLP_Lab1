@@ -10,7 +10,7 @@ def make_W_fst(word,i):
     checker to provide an "input" word
     """
     
-    print(format_arc(0, 1, word, word, -math.log10(i)))
+    print(format_arc(0, 0, word, word, -math.log10(i)))
 
 
 if __name__ == "__main__":
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     for l in lines:
         #print(l[1]/count)
         make_W_fst(l[0], float((int(l[1])/count)))
-    print("1") 
+    print("0") 

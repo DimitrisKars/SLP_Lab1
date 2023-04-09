@@ -29,5 +29,4 @@ if __name__ == "__main__":
     length = 0
     for word in dictionary:
         length = make_input_fst(word,length)
-    print("0")
 
