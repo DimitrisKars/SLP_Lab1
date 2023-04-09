@@ -19,9 +19,10 @@ if __name__ == "__main__":
         # Read the contents of the file into a list of lines
         lines = [ln.rstrip().split("\t") for ln in file.readlines()]
     count = 0
+    #print(lines)
     for l in lines:
         count += int(l[1])
     for l in lines:
-        #print(l[1])
-        make_W_fst(l[0],int(l[1])/count)
-    print(0) 
+        #print(l[1]/count)
+        make_W_fst(l[0], float((int(l[1])/count)))
+    print("0") 

@@ -1,24 +1,17 @@
 from util import EPS, format_arc
 import ast
-from math import log
+from math import log10
 
-with open("../vocab/chars.syms", 'r') as file:
-    data = file.read().replace('\n', '').replace('\t','')
-import re
-word1 = "".join(re.findall("[a-zA-Z]+", data))
-file_name = 'alphabet.syms'
-file_name=open("../vocab/alphabet.syms","w")
-file_name.write(word1)
-
-alphabet = word1
+file = open("../vocab/alphabet.syms","r")
+alphabet = file.read().strip()
 def weight(num):
-    return log(1/num)
+    return log10(1/num)
 
 def probability(f, N, V):
-    return (f+1)/(N+V)
+    return (f+(1/N))/(1+(V/N))
     
 
-with open("./dictionary.txt", 'r') as file:
+with open("../vocab/dictionary.txt", 'r') as file:
     data = file.read()
 frequencies = ast.literal_eval(data)
 
@@ -30,10 +23,11 @@ count_zero = 0
 count_prob = 0
 zero = []
 V = len(frequencies)
-N = 0
+edits_file = open('../vocab/edits.txt', 'r')
+N = len(edits_file.readlines())
 
-for key, item in frequencies.items():
-    N += item
+#for key, item in frequencies.items():
+#    N += item
 # Deletes: input character, output epsilon
 for l in alphabet:
     if (l, '<eps>') not in frequencies:
@@ -68,7 +62,6 @@ for l in alphabet:
                 p = probability(f, N, V)
                 count_prob += p
                 print(format_arc(0, 0, l, r, weight(p)))
-
 remaining = (1 - count_prob)/count_zero
 for z in zero:
 

@@ -1,21 +1,15 @@
 from util import EPS, format_arc
 import ast
-from math import log
+from math import log10
 
-with open("../vocab/chars.syms", 'r') as file:
-    data = file.read().replace('\n', '').replace('\t','')
-import re
-word1 = "".join(re.findall("[a-zA-Z]+", data))
-file_name = 'alphabet.syms'
-file_name=open("../vocab/alphabet.syms","w")
-file_name.write(word1)
+file = open("../vocab/alphabet.syms","r")
+alphabet = file.read()
 
-alphabet = word1
 def weight(num):
-    return log(1/num)
+    return log10(1/num)
 
-with open("./dictionary.txt", 'r') as file:
-    data = file.read()
+with open("../vocab/dictionary.txt", 'r') as file:
+    data = file.read().strip()
 frequencies = ast.literal_eval(data)
 
 inf = 1000000
@@ -36,7 +30,6 @@ for l in alphabet:
         print(format_arc(0, 0,"<eps>", l, inf))
     else:    
         print(format_arc(0, 0,"<eps>", l, weight(frequencies[('<eps>',l)])))
-    #print("0 0 <eps> {} {:.3f}".format(l, weight["insert"]))
 
 # Substitutions: input one character, output another
 for l in alphabet:
@@ -46,7 +39,6 @@ for l in alphabet:
                 print(format_arc(0, 0, l, r, inf))
             else:
                 print(format_arc(0, 0, l, r, weight(frequencies[l,r])))
-            #print("0 0 {} {} {:.3f}".format(l, r, weight["sub"]))
 
 # Final state
 print(0)

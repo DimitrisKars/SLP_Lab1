@@ -17,7 +17,7 @@ CURRENT_DIRECTORY=$(dirname $0)
 
 ###
 # Make sure to create these files
-CHARSSYMS=${CURRENT_DIRECTORY}/../syms/chars.syms  # Character symbol table
+CHARSSYMS=${CURRENT_DIRECTORY}/../vocab/chars.syms  # Character symbol table
 VANILLA_LEVENSHTEIN=${CURRENT_DIRECTORY}/../fsts/L.binfst  # Compile basic Levenshtein FST
 ###
 
